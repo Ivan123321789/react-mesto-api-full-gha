@@ -1,0 +1,6 @@
+.elements__element {
+    width: 282px;
+    border-radius: 10px;
+    display: block;
+    position: relative;
+}

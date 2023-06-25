@@ -1,0 +1,12 @@
+.popup__subtitle-image {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    bottom: -25px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FFF;
+}

@@ -1,0 +1,14 @@
+.elements__like {
+    width: 22px;
+    height: 19px;
+    background-image: url(../../../images/like_disabled.svg);
+    background-color: #FFFFFF;
+    transition: 0.5s;
+    border: none;
+    background-size: cover;
+}
+
+.elements__like:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
