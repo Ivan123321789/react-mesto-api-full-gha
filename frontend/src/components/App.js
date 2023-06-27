@@ -54,10 +54,13 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   
   function handleLikeClick(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    console.log(card);
+    // const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked)
     .then((newCard) => {
-      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+      console.log(newCard);
+      setCards((state) => state.map((c) => c._id === card._id ? newCard.data : c));
     })
     .catch((err) => {
       console.log(err);
@@ -65,9 +68,11 @@ function App() {
   }
 
   function handleCardDelete(card) {
+    console.log(card);
     setIsLoading(true);
     api.deleteCardApi(card._id)
     .then((res) => {
+      console.log(res);
       setCards((state) => state.filter((c) => c._id !== card._id))
     })
     .catch((err) => {
@@ -88,7 +93,7 @@ function App() {
     api.changeProfile(data)
     .then ((newUserInfo) => {
       console.log(newUserInfo);
-      setCurrentUser(newUserInfo);
+      setCurrentUser(newUserInfo.user);
       closeAllPopups();
     })
     .catch((err) => {
@@ -101,7 +106,7 @@ function App() {
     setIsLoading(true);
     api.changeAvatar(data)
     .then ((newUserInfo) => {
-      setCurrentUser(newUserInfo);
+      setCurrentUser(newUserInfo.user);
       closeAllPopups();
     })
     .catch((err) => {
@@ -112,9 +117,11 @@ function App() {
 
   function handleAddPlace(data) {
     setIsLoading(true);
+    console.log(data);
     api.postCard(data)
     .then((newCard) => {
-      setCards([newCard, ...cards]);
+      console.log(newCard);
+      setCards([newCard.data, ...cards]);
       closeAllPopups();
     })
     .catch((err) => {
@@ -152,6 +159,7 @@ function App() {
      .then((res) => {
        console.log(res);
        console.log(userData.email);
+       api.setToken(res.token);
        localStorage.setItem('jwt', res.token);
        setIsLoggedIn(true);
        setUserEmail(userData.email); 
@@ -171,8 +179,9 @@ function App() {
     if (token) {
       auth.checkToken(token)
       .then((res) => {
+        console.log(res);
         if (res) {
-          setUserEmail(res.data.email);
+          setUserEmail(res.user.email);
           setIsLoggedIn(true);
           navigate('/');
         }       
@@ -193,8 +202,8 @@ function App() {
     if (isLoggedIn) {
       Promise.all([api.getUser(), api.getCards()])
       .then(([userInfo, cards]) => {
-        setCurrentUser(userInfo);
-        setCards(cards);    
+        setCurrentUser(userInfo.user);
+        setCards(cards.data);    
       })
       .catch((err) => {
         console.log('Ошибка. Запрос не выполнен');

@@ -2,6 +2,16 @@ class Api {
   constructor ({url, headers}) {
     this._url = url;
     this._headers = headers;
+    this._token = null;
+  }
+
+  // Установка токена
+  setToken(token) {
+    this._token = token;
+    this._headers = {
+      ...this._headers,
+      'authorization': `Bearer ${token}`
+    }
   }
 
   // Проверка ответа сервера после запроса
@@ -112,11 +122,12 @@ class Api {
     ])
   }
 }
-
+let token = localStorage.getItem("jwt");
 export const api = new Api({
-  url: 'https://mesto.nomoreparties.co/v1/cohort-61',
+  // url: 'https://mesto.nomoreparties.co/v1/cohort-61',
+  url: 'http://localhost:3333',
   headers: {
-    authorization:  '8b330631-1fca-4744-b015-50bbb705af05',
+    authorization:  `Bearer ${token}`,
     'content-type': 'application/json'
   }
 });
