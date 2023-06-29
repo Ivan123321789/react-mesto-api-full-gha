@@ -18,10 +18,7 @@ const errorHandler = require('./src/middlewares/errorHandler');
 const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 const app = express();
 app.use(helmet());
-app.use(cors({
-  origin: '*',
-  allowedHeaders: ['Content-Type', 'Authorization'],
-}));
+app.use(cors());
 //app.use(CORS());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
