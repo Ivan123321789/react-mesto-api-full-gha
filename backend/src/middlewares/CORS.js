@@ -2,6 +2,7 @@ const allowedCors = [
     'https://ivan.nomoreparties.sbs',
     'http://ivan.nomoreparties.sbs',
     'http://localhost:3333/',
+    'http://localhost:4444/',
   ];
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
   

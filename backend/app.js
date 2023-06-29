@@ -18,9 +18,9 @@ const errorHandler = require('./src/middlewares/errorHandler');
 const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 const app = express();
 app.use(helmet());
+app.use(CORS());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(CORS());
 mongoose.connect(DB_URL)
   .then(() => console.log('connected'))
   .catch((err) => console.log(`Ошибка ${err.name}: ${err.message}`));
