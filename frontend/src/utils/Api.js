@@ -124,8 +124,8 @@ class Api {
 }
 let token = localStorage.getItem("jwt");
 export const api = new Api({
-  url: 'https://api.ivan.nomoreparties.sbs',
-  //url: 'http://localhost:3333',
+  // url: 'https://mesto.nomoreparties.co/v1/cohort-61',
+  url: 'http://localhost:3333',
   headers: {
     authorization:  `Bearer ${token}`,
     'content-type': 'application/json'

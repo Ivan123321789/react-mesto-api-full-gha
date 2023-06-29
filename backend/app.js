@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-//const cors = require('cors');
-const { CORS } = require('./src/middlewares/CORS');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
@@ -18,10 +17,9 @@ const errorHandler = require('./src/middlewares/errorHandler');
 const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 const app = express();
 app.use(helmet());
-//app.use(cors());
-app.use(CORS);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 mongoose.connect(DB_URL)
   .then(() => console.log('connected'))
   .catch((err) => console.log(`Ошибка ${err.name}: ${err.message}`));
@@ -33,11 +31,11 @@ app.use((req, res, next) => {
 
 app.use(requestLogger);
 
-app.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
-});
+// app.get('/crash-test', () => {
+//   setTimeout(() => {
+//     throw new Error('Сервер сейчас упадёт');
+//   }, 0);
+// });
 app.post('/signin', authValidation, login);
 app.post('/signup', regValidation, createUser);
 app.use('/', auth, userRouter);
