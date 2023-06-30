@@ -1,11 +1,11 @@
 require('dotenv').config();
 const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const { errors } = require('celebrate');
 const helmet = require('helmet');
 // const cors = require('cors');
 const { CORS } = require('./src/middlewares/CORS');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./src/middlewares/logger');
 const { authValidation, regValidation } = require('./src/middlewares/validation');
 const { login, createUser } = require('./src/controllers/users');
