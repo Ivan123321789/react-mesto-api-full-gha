@@ -10,7 +10,7 @@ class Api {
     this._token = token;
     this._headers = {
       ...this._headers,
-      'authorization': `Bearer ${token}`
+      authorization: `Bearer ${token}`
     }
   }
 
