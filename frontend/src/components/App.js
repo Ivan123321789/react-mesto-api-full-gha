@@ -133,7 +133,7 @@ function App() {
   }
 
   function handleSignOut() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('jwt');
     setIsLoggedIn(false);
   }
 
